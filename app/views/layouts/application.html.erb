@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Openarmy</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@11/swiper-bundle.min.css" />
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-teal-950 relative flex flex-col">
+    <div class="absolute top-8 w-full z-10">
+      <nav class="container mx-auto flex justify-between items-center" >
+        
+        <% if user_signed_in? %>
+          <div class="w-full flex justify-end items-center gap-8">
+            <span class="px-4 py-1 <%= current_user.admin? ? 'bg-amber-300 text-amber-700' : 'bg-teal-900 text-teal-300' %> rounded-lg">
+              <%= current_user.email %>
+            </span>
+            <%= link_to 'logout', destroy_user_session_path, class: 'px-4 py-2 font-semibold bg-green-900 hover:bg-green-950 text-green-200 rounded-xl'%>
+          </div>
+        <% else %>
+          <div class="w-full flex justify-end items-center gap-8">
+            <%= link_to 'signup', new_user_registration_path, class: 'px-4 py-2 font-semibold bg-blue-900 hover:bg-blue-950 text-blue-200 rounded-xl'%>
+            <%= link_to 'login', new_user_session_path, class: 'px-4 py-2 font-semibold bg-green-900 hover:bg-green-950 text-green-200 rounded-xl'%>
+          </div>
+        <% end %>
+      </nav>
+    </div>
+    <main class="w-full flex flex-col relative m-0 p-0 min-h-screen">
+      <%= yield %>
+    </main>
+    <footer class="w-full h-10 bg-slate-950 flex items-center py-8">
+      <div class="w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center px-8">
+        <p class="w-full text-center lg:text-left text-sm text-gray-100">© 2021 Openarmy</p>
+
+        <p class="w-full text-center lg:text-right text-sm text-gray-100">Powered by <a href="#">Lara</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<script>
+window.addEventListener('scroll', function() {
+  let scrollPosition = window.scrollY;
+  let suscribeDiv = document.getElementById('suscribe');
+  let infoDiv = document.getElementById('info');
+
+  let infoDivPosition = infoDiv.getBoundingClientRect().top + window.scrollY;
+
+  suscribeDiv.style.opacity = 1 - scrollPosition / 500;
+  infoDiv.style.opacity = 1 - (scrollPosition - infoDivPosition) / 500;
+});
+</script>

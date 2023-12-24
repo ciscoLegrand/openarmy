@@ -1,0 +1,30 @@
+<div class="mx-auto md:w-2/3 w-full flex flex-col gap-10">
+  <h1 class="font-bold text-4xl">New card</h1>
+
+  <%= form_with(model: @card, class: "contents") do |form| %>
+    <% if @card.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+        <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+        <div class="field">
+          <%= form.label :title %>
+          <%= form.text_field :title %>
+        </div>
+        <div class="field">
+          <%= form.label :description %>
+          <%= form.rich_text_area :description %>
+        </div>
+        <ul>
+          <% @card.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="inline">
+      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= link_to "Back to cards", cards_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    </div>
+  <% end %>
+
+</div>
