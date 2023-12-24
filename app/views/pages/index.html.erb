@@ -4,8 +4,8 @@
     <div class="w-full xl:w-2/5 flex flex-col justify-center items-center bg-emerald-950 p-14 border border-transparent rounded-xl">
       <% if current_user.admin? %>
         <%= form_with(model: @info, class: 'bg-transparent opacity-100') do |form|%>
-          <%= form.text_field :main_title, value: @info.secondary_title, class: 'w-full text-5xl font-bold text-emerald-400 text-center' %>
-          <%= form.text_field :main_subtitle, value: @info.secondary_subtitle, class: 'w-full text-3xl font-bold text-emerald-400 text-center' %>
+          <%= form.text_field :main_title, value: @info.main_title, class: 'w-full text-5xl font-bold text-emerald-400 text-center' %>
+          <%= form.text_field :main_subtitle, value: @info.main_subtitle, class: 'w-full text-3xl font-bold text-emerald-400 text-center' %>
           <%= form.submit "Actualizar", class: 'text-white bg-blue-500 rounded-xl px-4 py-2' %>
         <% end %>
       <% else %>

@@ -77,3 +77,5 @@ gem 'faker'
 
 gem 'devise'
 gem 'view_component'
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
