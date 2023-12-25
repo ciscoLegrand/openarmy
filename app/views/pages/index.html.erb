@@ -2,7 +2,7 @@
 <section id="portada" class="bg-fixed w-full h-screen bg-no-repeat" style="background-image: url(<%= asset_path 'content/dalle-militar.png' %>);background-size: cover;">
   <div id="suscribe" class="suscribe w-full h-full flex flex-col justify-center items-center relative">
     <div class="w-full xl:w-2/5 flex flex-col justify-center items-center bg-emerald-950 p-14 border border-transparent rounded-xl">
-      <% if current_user.admin? %>
+      <% if user_signed_in? && current_user&.admin? %>
         <%= form_with(model: @info, class: 'bg-transparent opacity-100') do |form|%>
           <%= form.text_field :main_title, value: @info.main_title, class: 'w-full text-5xl font-bold text-emerald-400 text-center' %>
           <%= form.text_field :main_subtitle, value: @info.main_subtitle, class: 'w-full text-3xl font-bold text-emerald-400 text-center' %>
@@ -14,7 +14,7 @@
       <% end %>
       <div class="w-full mt-8 flex flex-col xl:flex-row justify-center items-center gap-12">
 
-          <%= link_to '#', class: " flex justify-start items-start gap-8 hover:scale-125 transition-all ease-in-out duration-500" do %>
+          <%= link_to '#contacto', class: " flex justify-start items-start gap-8 hover:scale-125 transition-all ease-in-out duration-500" do %>
             <%= image_tag('content/military-right.png', class: 'w-32') %>
             <span class="w-fit h-12 mt-4 py-2 px-8 border border-blue-600 hover:bg-blue-600 text-blue-600 hover:text-white rounded-xl">Suscribe</span>
           <% end %>
@@ -32,7 +32,7 @@
 <section id="nosotros" class="container mx-auto p-12 text-center my-12">
     <h2 class="text-3xl font-bold text-slate-400">Sobre nosotros</h2>
 
-    <% if current_user.admin? %>
+    <% if user_signed_in? && current_user&.admin? %>
       <%= form_with(model: @info, local: true, class: 'mt-4 text-green-200 text-lg p-8 bg-teal-700 rounded-xl shadow-teal-800') do |form| %>
         <%= form.text_area :about, value: @info.about, class: 'w-full min-h-24 bg-transparent' %>
 
@@ -52,7 +52,7 @@
   <div id="info" class="suscribe w-full h-full flex flex-col justify-center items-center relative">
     <div class="w-full xl:w-2/5 flex flex-col justify-center items-center bg-emerald-950 p-14 border border-transparent rounded-xl">
       
-      <% if current_user.admin? %>
+      <% if user_signed_in? && current_user&.admin? %>
         <%= form_with(model: @info, class: 'bg-transparent opacity-100') do |form|%>
           <%= form.text_field :secondary_title, value: @info.secondary_title, class: 'w-full text-5xl font-bold text-emerald-400 text-center' %>
           <%= form.text_field :secondary_subtitle, value: @info.secondary_subtitle, class: 'w-full text-3xl font-bold text-emerald-400 text-center' %>
@@ -118,16 +118,16 @@
 
 <!-- Contact Section -->
 <section id="contacto" class="p-12 text-center">
-  <h2 class="text-3xl font-bold text-slate-400">Contáctanos</h2>
-  <form class="mt-8">
+  <h2 class="text-3xl font-bold text-slate-400">Alístate</h2>
+  <form id="contact_form" class="mt-8" data-controller="toast">
       <div class="mx-auto max-w-2xl">
           <div class="py-2">
               <span class="px-1 text-sm text-gray-600">Nombre</span>
-              <input placeholder="" type="text" class="text-md text-gray-300 block px-3 py-2 rounded-lg w-full bg-gray-900 border-2 border-transparent focus:outline-none focus:border-gray-600" />
+              <input placeholder="" required type="text" class="text-md text-gray-300 block px-3 py-2 rounded-lg w-full bg-gray-900 border-2 border-transparent focus:outline-none focus:border-gray-600" />
           </div>
           <div class="py-2">
               <span class="px-1 text-sm text-gray-600">Email</span>
-              <input placeholder="" type="text" class="text-md text-gray-300 block px-3 py-2 rounded-lg w-full bg-gray-900 border-2 border-transparent focus:outline-none focus:border-gray-600" />
+              <input placeholder="" type="text" class="text-md text-gray-300 block px-3 py-2 rounded-lg w-full bg-gray-900 border-2 border-transparent focus:outline-none focus:border-gray-600" required />
           </div>
           <div class="py-2">
               <span class="px-1 text-sm text-gray-600">Mensaje</span>
